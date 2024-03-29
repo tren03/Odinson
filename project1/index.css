@@ -1,0 +1,121 @@
+body{
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction: column;
+    
+}
+.hero,.navbar{
+    background-color: #1F2937;
+
+}
+.navbar{
+
+    color: #FFFFFF;
+    
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around; /* for main axis */
+    align-items: center; /* for cross axis */
+    
+    
+}
+.logo{
+    font-size: 24px;
+
+
+}
+.links{
+    display:flex;
+    font-size: 18px;
+        
+}
+.link{
+    padding: 20px;
+}
+
+
+/* hero page */
+.hero{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    /* justify-content: space-around;
+    padding: 50px */
+    justify-content: center;
+
+    
+    
+
+
+}
+.HeroContainer{
+    display: flex;
+    width:65%;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 50px;
+    
+
+
+}
+
+
+.HeroLeft{
+    flex-basis: 50%;
+   
+   
+    display: flex;
+    flex-direction: column;
+   
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.HeroText{
+    font-size: 48px;
+    font-weight: 800; /* extra bold is 800 weight */
+    color: #F9FAF8;
+    width: 400px;
+    text-align: left;
+
+    
+}
+.SubText{
+    font-size: 18px;
+    color: #e5e7eb;
+    width: 370px;
+    text-align: left;
+
+}
+button{
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 10px;
+    background-color: #3882F6 ;
+    color: #e5e7eb;
+    border-radius: 8px;
+    border: 0;
+    padding:8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+.HeroRight{
+    display: flex;
+    flex-direction: row;  
+    
+    flex-basis: 50%;
+    max-height: 500px;
+    
+    
+
+}
+#HeroImage{
+
+    width: 500px;
+    
+    
+    
+
+}
