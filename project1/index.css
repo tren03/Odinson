@@ -161,4 +161,30 @@ button{
     text-align: center;
     
 }
+.Info{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 350px;
+    justify-content: center;
+    background-color: #E5E7EB;
+}
+.InfoText{
+    width: 50%;
+    font-size: 36px;
+    color: #1F2937;
+    text-align: center;
+}
+.InfoAuthorContainer{
+    width: 50%;
+    padding-top: 10px;
+    
 
+}
+.InfoAuthor{
+    font-size: larger;
+    text-align: right;
+    font-weight: 700;
+
+}
