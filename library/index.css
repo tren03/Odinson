@@ -1,0 +1,43 @@
+/* Global styles */
+body {
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Adjust the width of specific table cells */
+th:nth-child(1), td:nth-child(1) { /* First column (Author) */
+  width: 30%; /* Adjust the width as needed */
+}
+
+th:nth-child(2), td:nth-child(2) { /* Second column (Title) */
+  width: 30%; /* Adjust the width as needed */
+}
+
+th:nth-child(3), td:nth-child(3), /* Third column (Pages) */
+th:nth-child(4), td:nth-child(4) /* Fourth column (Status) */ {
+  width: 10%; /* Adjust the width as needed */
+}
+
+
