@@ -20,9 +20,39 @@ const button = document.getElementById("add");
 let book3 = new Book("thesdk", "adkflkj", 235, "adsflk");
 
 button.addEventListener("click",()=>{
-    addBookToLibrary(book3);
-    console.log(mylib.length)
+    // addBookToLibrary(book3);
+    // console.log(mylib.length)
+
+    addRow(); // we will add arguments later
 })
+
+// dynamically adding rows to existing table via js
+
+
+function addRow()
+{
+    var table = document.getElementById("table")
+    var row = table.insertRow()
+    var complete_row_data = []
+    for(i=0;i<=3;i++)
+    {
+        var data = document.createElement("td")
+        data.innerHTML = "sample"
+        complete_row_data.push(data)
+
+    }
+    for(i=0;i<=3;i++)
+    {
+        row.appendChild(complete_row_data[i])
+
+    }
+    
+    
+
+    
+
+}
+
 
 
 
