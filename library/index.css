@@ -41,3 +41,76 @@ th:nth-child(4), td:nth-child(4) /* Fourth column (Status) */ {
 }
 
 
+/* popup styling */
+.loginPopup {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.formPopup {
+  display: none; /* Change 'show' to 'none' to hide popup by default */
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid #999999;
+  z-index: 9;
+}
+
+.formContainer {
+  max-width: 300px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  margin-bottom: 15px;
+}
+
+.inputRow label {
+  flex: 0 0 auto; /* Prevent label from growing */
+  margin-right: 10px;
+  text-align: right;
+}
+
+.inputRow select {
+  flex: 1; /* Let the select element fill remaining space */
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  border: none;
+  background: #eee;
+}
+
+
+.inputRow input[type=text] {
+  flex: 2;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  border: none;
+  background: #eee;
+}
+
+.formContainer .btn {
+  padding: 12px 20px;
+  border: none;
+  background-color: #8ebf42;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 15px;
+  opacity: 0.8;
+}
+
+.formContainer .cancel {
+  background-color: #cc0000;
+}
+
+.formContainer .btn:hover,
+.openButton:hover {
+  opacity: 1;
+}
+

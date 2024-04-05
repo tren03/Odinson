@@ -9,6 +9,8 @@ function Book(author, title, pages, status) {
 let book1 = new Book("mark", "CoolFirstBook", 234, "unread");
 let book2 = new Book("mark", "CoolFirstBook", 234, "unread");
 
+popUp = document.getElementById("popupForm")
+
 const mylib = [book1, book2]; // array to store the books
 
 //function to push book into library
@@ -21,10 +23,14 @@ const button = document.getElementById("add");
 let book3 = new Book("thesdk", "adkflkj", 235, "adsflk");
 
 button.addEventListener("click", () => {
-    // addBookToLibrary(book3);
-    // console.log(mylib.length)
+    popUp.style.display = "block" //shows the popup
+    document.getElementById("btn").addEventListener("click",()=>{
+        var book = new Book(document.getElementById("author").value,document.getElementById("title").value,document.getElementById("pages").value,document.getElementById("status").value)
+        addBookToLibrary(book);
+        addRow(book)
+        closeForm()
 
-    addRow(book3); // we will add arguments later
+    })
 });
 
 // dynamically adding rows to existing table via js
@@ -43,4 +49,15 @@ function addRow(book) {
     })
 
 
+}
+
+// close_button = document.getElementById("close_button")
+
+// close_button.addEventListener("click",()=>{
+//     popUp.style.display = "none"
+// })
+
+function closeForm()
+{
+    popUp.style.display = "none"
 }
