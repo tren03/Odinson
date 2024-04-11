@@ -6,7 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <style>
+        body {
+            text-align: center;
+            /* Center align everything within the body */
+        }
+
+        h1,
+        .header,
+        .button,
+        .reset {
+            margin: 20px auto;
+            /* Center horizontally with top and bottom margin */
+        }
+
         table {
+            display: none;
+            /* Hide the table initially */
             margin: 0 auto;
             /* Center the table */
             border-collapse: collapse;
@@ -14,24 +29,28 @@
 
         td {
             width: 100px;
-            /* Width of each cell */
             height: 100px;
-            /* Height of each cell */
             text-align: center;
             vertical-align: middle;
             border: 1px solid black;
             font-size: 40px;
-            /* Increase font size */
+        }
+
+        #reset {
+            margin: 0 auto;
+            margin-top: 20px;
+            display: none;
+            /* Hide the reset button initially */
         }
     </style>
 </head>
 
 <body>
-    <div>
-        <h1>This is to check tic tac toe</h1>
-        <button id="b">Click me</button>
+    <div class="header">
+        <h1>Tic tac toe</h1>
+        <button id="button">Player 1 to choose symbol to start the game</button>
     </div>
-    <table id= "table" border="1" >
+    <table id="table" border="1">
         <tr>
             <td></td>
             <td></td>
@@ -48,6 +67,7 @@
             <td></td>
         </tr>
     </table>
+    <button id="reset">reset game</button>
     <script src="index.js"></script>
 </body>
 
