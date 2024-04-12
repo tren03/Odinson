@@ -6,8 +6,8 @@ gameboard = {
     ],
 };
 
-function Player(symbol) {
-    return { symbol };
+function Player(symbol,turn) {
+    return { symbol,turn };
 }
 
 function display(gameboard) {
@@ -15,6 +15,7 @@ function display(gameboard) {
     console.log(gameboard.board[1]);
     console.log(gameboard.board[2]);
 }
+let player1, player2
 
 var button = document.getElementById("button");
 button.addEventListener("click", () => {
@@ -24,11 +25,11 @@ button.addEventListener("click", () => {
     }
     console.log(p1);
     if (p1 == "x") {
-        var player1 = Player("x");
-        var player2 = Player("o");
+        player1 = Player("x",true);
+        player2 = Player("o",false);
     } else {
-        var player1 = Player("o");
-        var player2 = Player("x");
+        player1 = Player("o",true);
+        player2 = Player("x",false);
     }
     game(player1, player2);
     button.style.display = "none";
@@ -38,10 +39,7 @@ button.addEventListener("click", () => {
 
 
 
-function handle(rowIndex,cellIndex)
-{
-    return [rowIndex,cellIndex]
-}
+
 
 function win(gameboard, symbol) {
     var row_count = 0;
@@ -92,6 +90,64 @@ function win(gameboard, symbol) {
     return false;
 }
 
+function handle(rowIndex, cellIndex, cell) {
+    if (player1.turn == true && cell.textContent == "") {
+        cell.textContent = player1.symbol
+        
+        update()
+        if (win(gameboard, player1.symbol)) {
+            console.log("Player 1 wins!");
+            handle_win(player1)
+        }
+        player1.turn = false
+        player2.turn = true
+        
+    }
+
+    if (player2.turn == true && cell.textContent == "") {
+        cell.textContent = player2.symbol
+        update()
+        if (win(gameboard, player2.symbol)) {
+            console.log("Player 2 Wins!")
+            handle_win(player2)
+        }
+        player2.turn = false
+        player1.turn = true
+        
+    }
+    setTimeout(check_draw,100)
+   
+
+    
+    display(gameboard);
+}
+
+function check_draw(){
+    var cells = document.querySelectorAll("#table td");
+    let i = 0
+    cells.forEach((cell)=>{
+    if(cell.textContent != "")
+        {
+            i++
+        }
+        
+
+    })
+    if((!win(gameboard,player1.symbol) && i==9) && (!win(gameboard,player2.symbol) && i==9))
+    {
+        alert("DRAW")
+    }
+}
+
+function handle_win(player) {
+    setTimeout(function() {
+        alert(player.symbol + " WINS!");
+    }, 100); // Delayed for 100 milliseconds to allow other operations to finish
+}
+
+
+
+
 function game(player1, player2) {
     var table = (document.getElementById("table").style.display = "table");
 
@@ -101,9 +157,13 @@ function game(player1, player2) {
         cells[i].addEventListener("click", function () {
             var rowIndex = this.parentNode.rowIndex; // Index of the row
             var cellIndex = this.cellIndex;
-            handle(rowIndex,cellIndex) // returns object
+            handle(rowIndex,cellIndex,this) // index
+            
+            
         });
     }
+    
+    
     
     
 }
