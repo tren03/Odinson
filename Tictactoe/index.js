@@ -6,8 +6,8 @@ gameboard = {
     ],
 };
 
-function Player(symbol,turn) {
-    return { symbol,turn };
+function Player(symbol, turn) {
+    return { symbol, turn };
 }
 
 function display(gameboard) {
@@ -15,7 +15,20 @@ function display(gameboard) {
     console.log(gameboard.board[1]);
     console.log(gameboard.board[2]);
 }
-let player1, player2
+
+
+var reset = document.getElementById("reset")
+reset.addEventListener("click", () => {
+    var cells = document.querySelectorAll("#table td");
+    for (var i = 0; i < cells.length; i++) {
+        cells[i].textContent = ""
+        
+    }
+    update()
+
+})
+
+let player1, player2;
 
 var button = document.getElementById("button");
 button.addEventListener("click", () => {
@@ -25,27 +38,29 @@ button.addEventListener("click", () => {
     }
     console.log(p1);
     if (p1 == "x") {
-        player1 = Player("x",true);
-        player2 = Player("o",false);
+        player1 = Player("x", true);
+        player2 = Player("o", false);
     } else {
-        player1 = Player("o",true);
-        player2 = Player("x",false);
+        player1 = Player("o", true);
+        player2 = Player("x", false);
     }
     game(player1, player2);
     button.style.display = "none";
-    var reset = (document.getElementById("reset").style.display = "block");
+    var p1 = document.getElementById("p1")
+    var p2 = document.getElementById("p2")
+    p1.textContent = "Player 1 symbol = "+player1.symbol
+    p2.textContent = "Player 2 symbol = "+player2.symbol
+    p1.style.display = "block"
+    p2.style.display = "block"
+    var reset = (document.getElementById("reset").style.display = "block"); // show the reset button once the user gets in the game
+
 });
-
-
-
-
-
 
 function win(gameboard, symbol) {
     var row_count = 0;
     var col_count = 0;
     var diag_count = 0;
-    
+
     // Check rows and columns
     for (var i = 0; i < 3; i++) {
         row_count = 0;
@@ -60,7 +75,7 @@ function win(gameboard, symbol) {
         }
         if (row_count === 3 || col_count === 3) {
             console.log(symbol, "WINS");
-            return true; 
+            return true;
         }
     }
 
@@ -73,7 +88,7 @@ function win(gameboard, symbol) {
     }
     if (diag_count === 3) {
         console.log(symbol, "WINS");
-        return true; 
+        return true;
     }
 
     diag_count = 0;
@@ -84,69 +99,77 @@ function win(gameboard, symbol) {
     }
     if (diag_count === 3) {
         console.log(symbol, "WINS");
-        return true; 
+        return true;
     }
 
     return false;
 }
 
-function handle(rowIndex, cellIndex, cell) {
+function handle(cell) {
     if (player1.turn == true && cell.textContent == "") {
-        cell.textContent = player1.symbol
-        
-        update()
+        cell.textContent = player1.symbol;
+
+        update();
         if (win(gameboard, player1.symbol)) {
             console.log("Player 1 wins!");
-            handle_win(player1)
+            // set all other cells with space so user cannot enter anything else
+            var cells = document.querySelectorAll("#table td");
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i].textContent != "x" && cells[i].textContent != "o") {
+                    cells[i].textContent = " ";
+                }
+            }
+            handle_win(player1);
         }
-        player1.turn = false
-        player2.turn = true
-        
+        player1.turn = false;
+        player2.turn = true;
     }
 
     if (player2.turn == true && cell.textContent == "") {
-        cell.textContent = player2.symbol
-        update()
+        cell.textContent = player2.symbol;
+        update();
         if (win(gameboard, player2.symbol)) {
-            console.log("Player 2 Wins!")
-            handle_win(player2)
+            console.log("Player 2 Wins!");
+            // set all other cells with space so user cannot enter anything else
+            var cells = document.querySelectorAll("#table td");
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i].textContent != "x" && cells[i].textContent != "o") {
+                    cells[i].textContent = " ";
+                }
+            }
+            handle_win(player2);
         }
-        player2.turn = false
-        player1.turn = true
-        
+        player2.turn = false;
+        player1.turn = true;
     }
-    setTimeout(check_draw,100)
-   
+    setTimeout(check_draw, 100);
 
-    
     display(gameboard);
 }
 
-function check_draw(){
+function check_draw() {
     var cells = document.querySelectorAll("#table td");
-    let i = 0
-    cells.forEach((cell)=>{
-    if(cell.textContent != "")
-        {
-            i++
+    let i = 0;
+    cells.forEach((cell) => {
+        if (cell.textContent != "") {
+            i++;
         }
-        
-
-    })
-    if((!win(gameboard,player1.symbol) && i==9) && (!win(gameboard,player2.symbol) && i==9))
-    {
-        alert("DRAW")
+    });
+    if (
+        !win(gameboard, player1.symbol) &&
+        i == 9 &&
+        !win(gameboard, player2.symbol) &&
+        i == 9
+    ) {
+        alert("DRAW");
     }
 }
 
 function handle_win(player) {
-    setTimeout(function() {
-        alert(player.symbol + " WINS!");
+    setTimeout(function () {
+        alert(player.symbol + " WINS! Click reset to play again!");
     }, 100); // Delayed for 100 milliseconds to allow other operations to finish
 }
-
-
-
 
 function game(player1, player2) {
     var table = (document.getElementById("table").style.display = "table");
@@ -155,22 +178,15 @@ function game(player1, player2) {
     var cells = document.querySelectorAll("#table td");
     for (var i = 0; i < cells.length; i++) {
         cells[i].addEventListener("click", function () {
-            var rowIndex = this.parentNode.rowIndex; // Index of the row
-            var cellIndex = this.cellIndex;
-            handle(rowIndex,cellIndex,this) // index
-            
-            
+            // var rowIndex = this.parentNode.rowIndex; // Index of the row
+            // var cellIndex = this.cellIndex;
+            handle(this); // index
         });
     }
-    
-    
-    
-    
 }
 
 // updates the contents on the frontend to the board object here to do operations
-function update(){
-
+function update() {
     for (let i = 0; i < 3; i++) {
         const row = document.getElementsByTagName("tr");
         const cells = row[i].getElementsByTagName("td");
@@ -180,18 +196,11 @@ function update(){
     }
 }
 
-
-
-
-
-
-
 // for (var i = 0; i < cells.length; i++) {
 //     cells[i].addEventListener("click", function () {
 //         var rowIndex = this.parentNode.rowIndex; // Index of the row
 //         var cellIndex = this.cellIndex;
 
-        
 //         // console.log("row : ",rowIndex);
 //         // console.log("col : ",cellIndex);
 //         // if (this.textContent == "x") {
